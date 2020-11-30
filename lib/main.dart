@@ -12,14 +12,15 @@ class MyApp extends StatefulWidget {
 }
 
 class _State extends State<MyApp> {
-  String _value = "";
+  bool _value1 = false;
+  bool _value2 = false;
 
-  void _onChange(String value) {
-    setState(() => _value = "Change: $value");
+  void _value1Changed(bool value) {
+    setState(() => _value1 = value);
   }
 
-  void _onSubmit(String value) {
-    setState(() => _value = "Submit: $value");
+  void _value2Changed(bool value) {
+    setState(() => _value2 = value);
   }
 
   @override
@@ -33,18 +34,15 @@ class _State extends State<MyApp> {
           child: new Center(
             child: new Column(
               children: <Widget>[
-                new Text(_value),
-                new TextField(
-                  decoration: new InputDecoration(
-                    labelText: "Hello",
-                    hintText: "Hint",
-                    icon: new Icon(Icons.people),
-                  ),
-                  autocorrect: true,
-                  autofocus: true,
-                  keyboardType: TextInputType.text, //キーボード起動時のデフォルト
-                  onChanged: _onChange,
-                  onSubmitted: _onSubmit,
+                new Checkbox(value: _value1, onChanged: _value1Changed),
+                new CheckboxListTile(
+                  value: _value2,
+                  onChanged: _value2Changed,
+                  title: new Text('Hello world'),
+                  controlAffinity: ListTileControlAffinity.leading,
+                  subtitle: new Text('Subtitle'),
+                  secondary: Icon(Icons.archive),
+                  activeColor: Colors.red,
                 )
               ],
             ),

@@ -12,15 +12,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _State extends State<MyApp> {
-  bool _value1 = false;
-  bool _value2 = false;
+  double _value = 0.0;
 
-  void _onChanged1(bool value) {
-    setState(() => _value1 = value);
-  }
-
-  void _onChanged2(bool value) {
-    setState(() => _value2 = value);
+  void _setValue(double value) {
+    setState(() => _value = value);
   }
 
   @override
@@ -32,17 +27,10 @@ class _State extends State<MyApp> {
         body: Container(
           padding: new EdgeInsets.all(32.0),
           child: new Center(
-            child: new Column(
-              children: <Widget>[
-                new Switch(value: _value1, onChanged: _onChanged1),
-                new SwitchListTile(
-                    value: _value2,
-                    onChanged: _onChanged2,
-                    title: new Text('Hello World',
-                        style: new TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.red)))
-              ],
-            ),
+            child: new Column(children: <Widget>[
+              new Text('value: ${(_value * 100).round()}'),
+              new Slider(value: _value, onChanged: _setValue)
+            ]),
           ),
         ));
   }
